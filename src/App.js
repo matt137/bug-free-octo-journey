@@ -8,23 +8,21 @@ function App() {
       <div className="App-header">
         <h1>Pokemon Database</h1>
       </div>
-      <PokemonGrid data={data} />
-      
+      <PokemonGrid data={data} />     
     </div>
   );
 }
 
 function PokemonGrid({data}) {
   const elements = [];
+  data.forEach((pokemon) => {
+    elements.push(
+      <Pokemon pokemon={pokemon} />
+    );
 
-  return <div className="wrapper">
-      {
-        data.map((pokemon) =>  {
-             <Pokemon pokemon={pokemon} />
-          })
-      }
+  });
 
-      </div>
+  return <div className="wrapper">{elements}</div>
 }
 
 function Pokemon({pokemon}) {
