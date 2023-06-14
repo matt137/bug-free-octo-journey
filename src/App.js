@@ -1,24 +1,49 @@
-import logo from './logo.svg';
 import './App.css';
 
 function App() {
+  let data = require('./data/pokedex.json');
   return (
+    
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="App-header">
+        <h1>Pokemon Database</h1>
+      </div>
+      <PokemonGrid data={data} />
+      
     </div>
+  );
+}
+
+function PokemonGrid({data}) {
+  const elements = [];
+
+  return <div className="wrapper">
+      {
+        data.map((pokemon) =>  {
+             <Pokemon pokemon={pokemon} />
+          })
+      }
+
+      </div>
+}
+
+function Pokemon({pokemon}) {
+  let num = String(pokemon.id).padStart(3, '0');
+  return <div key={pokemon.id} className="pokemon-container">
+    <img src={require('./data/thumbnails/' + num + '.png')} alt={pokemon.name.english} />
+  </div>
+}
+
+function SearchBar() {
+  return (
+    <form>
+      <input type="text" placeholder="Search..." />
+      <label>
+        <input type="checkbox" />
+        {' '}
+        Only show products in stock
+      </label>
+    </form>
   );
 }
 
